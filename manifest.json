@@ -17,6 +17,10 @@
     }
   ],
 
+  "permissions": [
+    "storage"
+  ],
+
   "applications": {
     "gecko": {
       "id": "add-on@bors.tech"
