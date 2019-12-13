@@ -13,5 +13,8 @@
     "web-ext": "^3.2.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "@octokit/rest": "^16.35.0"
   }
 }
