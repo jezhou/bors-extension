@@ -4,6 +4,7 @@ module.exports = {
   entry: {
     bors: './src/bors_entry.js',
     options: './src/options_entry.js',
+    background: './src/background_entry.js'
   },
   output: {
     filename: '[name].bundle.js',
