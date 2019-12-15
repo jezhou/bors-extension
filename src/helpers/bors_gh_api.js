@@ -11,16 +11,17 @@ const REVIEW_TYPES = {
 
 export default class BorsExtension {
   constructor() {
-    const settings = storage.sync.get();
+    this.settings = storage.sync.get(STORAGE_USE_GH_API, STORAGE_GH_API_TOKEN);
 
-    if (!settings[STORAGE_USE_GH_API]) {
-      this.notEnabled = true;
-      return;
-    }
+    this.octokit = this.settings.then((results) => {
+      if (!results[STORAGE_USE_GH_API]) {
+        return Promise.resolve();
+      }
 
-    this.octokit = new Octokit({
-      auth: settings[STORAGE_GH_API_TOKEN],
-      userAgent: 'bors-extension',
+      return new Octokit({
+        auth: results[STORAGE_GH_API_TOKEN],
+        userAgent: 'bors-extension',
+      });
     });
   }
 
@@ -33,7 +34,9 @@ export default class BorsExtension {
       return Promise.resolve();
     }
 
-    const response = await this.octokit.pulls.createReview({
+    const octokit = await this.octokit;
+
+    octokit.pulls.createReview({
       owner,
       repo,
       pull,

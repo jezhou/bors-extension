@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    bors: './src/bors_entry.js',
+    content: './src/content.js',
     options: './src/options_entry.js',
   },
   output: {
